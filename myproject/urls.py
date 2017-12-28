@@ -21,5 +21,7 @@ urlpatterns = [
 
     path('', views.PostList.as_view(), name='home'),
 
+    path('post/<int:id>', views.PostPage.as_view(), name='post'),
+
     path('admin/', admin.site.urls),
 ]

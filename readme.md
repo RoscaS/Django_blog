@@ -1,3 +1,13 @@
+# Temp
+`{{ value|truncatechars:9 }}`
+* [truncator in templates](https://stackoverflow.com/questions/5235994/django-template-tag-to-truncate-text)
+
+```
+sol@46.101.221.94
+pass1234
+```
+
+# Tools
 ```
 mkdir myproject
 cd myproject

@@ -22,3 +22,4 @@ class Comment(models.Model):
     def __str__(self):
         short = Truncator(self.body)
         return short.chars(30)
+

@@ -6,11 +6,7 @@
 
 {% block title %}Home{% endblock title %}
 
-{% block javascript %}
-  <script src="{% static 'js/type.js' %}"></script>
-{% endblock javascript %}
-
-{% block intro %}{% include 'includes/_type.html' %}{% endblock %}
+{% block intro %} {% include 'includes/_type.html' %} {% endblock %}
 
 {% block content %}
   <h1 class="my-4">Articles:
@@ -23,12 +19,13 @@
     <img class="card-img-top" src="https://picsum.photos/750/300/?image={% random_int 1 1000 %}" alt="Card image cap">
     <div class="card-body">
       <h2 class="card-title">{{ post.title }}</h2>
-      <p class="card-text">{{ post.body|truncatewords_html:50 }}</p>
-      <a href="#" class="btn btn-primary">Read More &rarr;</a>
+      <h5 class="text-muted"><i>{{ post.headline }}</i></h5>
+      <p class="card-text">{{ post.body | truncatewords_html:50 | safe}}</p>
+      <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">
       {{ post.date }} by
-      <a href="#">{{ post.user }}</a>
+      <a href="#">{{ post.author }}</a>
     </div>
   </div>
   {% endfor %}
@@ -36,3 +33,7 @@
   {% include "includes/_pagination.html" %}
 
 {% endblock content %}
+
+{% block javascript %}
+  <script src="{% static 'js/type.js' %}"></script>
+{% endblock javascript %}

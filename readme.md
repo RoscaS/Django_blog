@@ -26,6 +26,10 @@ python manage makemigrations
 python manage migrate
 ```
 
+```
+python manage.py createsuperuser
+```
+
 
 ```py
 User.objects.all()[0].delete()

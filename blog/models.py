@@ -24,7 +24,7 @@ class Post(models.Model):
         seed()
         for i in range(count):
             Post.objects.create(
-                title    = forgery_py.lorem_ipsum.words(randint(2,5)),
+                title    = forgery_py.lorem_ipsum.words(randint(2,5)).capitalize(),
                 headline = forgery_py.lorem_ipsum.sentence(),
                 body     = ''.join([_paragraph() for i in range(randint(1, 4))]),
                 author   = User.objects.get(username='RoscaS')
@@ -40,4 +40,6 @@ class Comment(models.Model):
     def __str__(self):
         short = Truncator(self.body)
         return short.chars(30)
+
+
 

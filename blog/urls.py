@@ -16,6 +16,10 @@ urlpatterns = [
         name='post_detail'
     ),
 
-
+    path(
+        'contact/',
+        views.ContactView.as_view(template_name='blog/contact.html'),
+        name='contact'
+    ),
 
 ]

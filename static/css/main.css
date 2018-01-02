@@ -1,0 +1,18 @@
+
+
+.typewrite {
+    color: black;
+}
+
+.title {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 35px;
+    letter-spacing: -1px;
+    line-height: 1;
+}
+
+.content {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}

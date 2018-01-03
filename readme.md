@@ -179,3 +179,10 @@ accounts/password_reset/done/ [name='password_reset_done']
 accounts/reset/<uidb64>/<token>/ [name='password_reset_confirm']
 accounts/reset/done/ [name='password_reset_complete']
 ```
+
+# Allauth
+
+## Github
+
+* Client ID: `bb619d2e9e29bc30cf18`
+* Client Secret: `97679f4c72b1ce43442f700e2a9b4ea19a24cda1`

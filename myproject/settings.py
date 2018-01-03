@@ -38,10 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Allauth
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+
+    # Divers
     'django_extensions',
     'widget_tweaks',
     'bootstrap4',
 
+    # Internal
     'blog',
     'accounts',
 ]
@@ -140,3 +149,10 @@ LOGOUT_REDIRECT_URL = '/'
 
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# Allauth
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+SITE_ID = 1

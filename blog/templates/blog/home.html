@@ -21,7 +21,7 @@
       <h2 class="card-title">{{ post.title }}</h2>
       <h5 class="text-muted"><i>{{ post.headline }}</i></h5>
       <p class="card-text">{{ post.body | truncatewords_html:50 | safe}}</p>
-      <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">Read More &rarr;</a>
+      <a href="{% url 'post_detail' post.id %}" class="btn btn-primary"><strong>Read More</strong></a>
     </div>
     <div class="card-footer text-muted">
       {{ post.date }} by

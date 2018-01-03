@@ -1,22 +1,33 @@
-{% extends "accounts/accounts_base.html" %}
+{% extends "base.html" %}
 
-{% block title %}
-Sign Up
-{% endblock %}
+{% block title %}Sign Up{% endblock %}
 
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8 col-md-10 col-sm-12">
+    <div class="card">
 
-{% block card_title %}
-Sign up
-{% endblock %}
+      <div class="card-body">
+        <h3 class="card-title"> <strong>Sign Up</strong> </h3>
+          <p></p>
+        <form method="post" novalidate>
+          {% csrf_token %} 
+          {% include 'includes/_form.html' %}
+          <button type="submit" class="btn btn-primary btn-block">
+            <strong>Create an account</strong>
+          </button>
+        </form>
+      </div>
 
+      <div class="card-footer text-muted text-center">
+        Already have an account? <a href="{% url 'login' %}">Log in</a>
+      </div>
 
-{% block button %}
-<button type="submit" class="btn btn-primary btn-block">
-  <strong>Create an account</strong>
-</button>
-{% endblock %}
+    </div>
 
-
-{% block card_footer %}
-Already have an account? <a href="{% url 'login' %}">Log in</a>
-{% endblock %}
+    <div class="text-center py-2">
+      <small> <a class="text-muted" href="{% url 'password_reset' %}">Forgot your password</a> </small>
+    </div>  
+  </div>
+</div>
+{% endblock content %}

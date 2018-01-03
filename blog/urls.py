@@ -6,19 +6,19 @@ urlpatterns = [
 
     path(
         '', 
-        views.HomeListView.as_view(template_name='blog/home.html'), 
+        views.HomeListView.as_view(), 
         name='home'
     ),
 
     path(
         'post/<int:pk>', 
-        views.PostDetailView.as_view(template_name='blog/post_detail.html'), 
+        views.PostDetailView.as_view(), 
         name='post_detail'
     ),
 
     path(
         'contact/',
-        views.ContactView.as_view(template_name='blog/contact.html'),
+        views.ContactView.as_view(),
         name='contact'
     ),
 

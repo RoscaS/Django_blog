@@ -21,12 +21,7 @@
           {% csrf_token %} 
           {% include 'includes/_form.html' %}
           {% block button %}
-          <button type="submit" 
-                  class="{% block button_type %}{% endblock %}">
-                  <strong>
-                    {% block button_label %}{% endblock  %}
-                  </strong>
-          </button>
+
           {% endblock %}
         </form>
       </div>

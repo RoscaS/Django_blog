@@ -11,19 +11,17 @@ Log in
 {% endblock %}
 
 
-{% block button_type %}
-btn btn-primary btn-block
-{% endblock %}
-
-
-{% block button_label %}
-Log in
+{% block button %}
+<button type="submit" class="btn btn-primary btn-block">
+  <strong>Log in</strong>
+</button>
 {% endblock %}
 
 
 {% block card_footer %}
 New to this blog? <a href="{% url 'signup' %}">Sign up</a>
 {% endblock %}
+
 
 {% block extra %}
 <small>

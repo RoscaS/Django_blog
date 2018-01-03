@@ -26,6 +26,8 @@ urlpatterns = [
          name='logout'
     ),
 
+
+    ########## FORGOTEN PASSWORD ##########
     path(
         'reset/', 
         auth_views.PasswordResetView.as_view(
@@ -54,8 +56,30 @@ urlpatterns = [
     path(
         'reset/complete/', 
         auth_views.PasswordResetCompleteView.as_view(
-            template_name='accounts/password_reset_complete.html'), 
+            template_name='accounts/password_reset_complete.html'
+        ), 
         name='password_reset_complete' 
     ),
+
+
+
+    ########## CHANGE PASSWORD ########## (logged in users only)
+    path(
+        'settings/password/',
+        auth_views.PasswordChangeView.as_view(
+            template_name='accounts/password_change.html'
+        ),
+        name='password_change',
+    ),
+
+    path(
+        'settigns/password/done/',
+        auth_views.PasswordChangeDoneView.as_view(
+            template_name='accounts/password_change_done.html'
+        ),
+        name='password_change_done'
+    ),
+
+
 
 ]

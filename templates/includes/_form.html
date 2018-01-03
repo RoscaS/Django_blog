@@ -9,6 +9,9 @@
 {% endif %}
 
 {% for field in form %}
+  <small class="form-text text-muted">
+    {{ field.help_text|safe }}
+  </small>
   <div class="form-group">
     {{ field.label_tag }}
     {% if form.is_bound %}

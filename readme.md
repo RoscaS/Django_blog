@@ -1,3 +1,8 @@
+# TODO
+
+* Protecting views (don't forget **Contact**)
+
+
 # Temp
 `{{ value|truncatechars:9 }}`
 * [truncator in templates](https://stackoverflow.com/questions/5235994/django-template-tag-to-truncate-text)

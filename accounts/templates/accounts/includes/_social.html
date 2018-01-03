@@ -1,0 +1,16 @@
+{% load socialaccount %}
+
+
+<p class="text-muted text-center">Sign up with Github, Google, Facebook or Username</p>
+<hr>
+<!-- TODO if user already signed up redirect ->error -->
+<a class="btn btn-block btn-social btn-google" href="{% provider_login_url 'google' %}">
+  <span class="fa fa-google"></span><strong>Google</strong>
+</a>
+<a class="btn btn-block btn-social btn-github" href="{% provider_login_url 'github' %}">
+  <span class="fa fa-github"></span><strong>Github</strong>
+</a>
+<a class="btn btn-block btn-social btn-facebook" href="{% provider_login_url 'facebook' %}">
+  <span class="fa fa-facebook"></span><strong>Facebook</strong>
+</a>
+<br>

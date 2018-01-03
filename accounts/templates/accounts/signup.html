@@ -8,8 +8,8 @@
     <div class="card">
 
       <div class="card-body">
-        <h3 class="card-title"> <strong>Sign Up</strong> </h3>
-          <p></p>
+        <h3 class="card-title text-center"> <strong>Sign Up</strong> </h3>
+        {% include "accounts/includes/_social.html" %}
         <form method="post" novalidate>
           {% csrf_token %} 
           {% include 'includes/_form.html' %}
@@ -26,7 +26,7 @@
     </div>
 
     <div class="text-center py-2">
-      <small> <a class="text-muted" href="{% url 'password_reset' %}">Forgot your password</a> </small>
+      <a class="text-muted" href="{% url 'password_reset' %}">Forgot your password?</a>
     </div>  
   </div>
 </div>

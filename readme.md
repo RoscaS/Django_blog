@@ -7,6 +7,38 @@
 
 Why use `reverse_lazy` instead of `reverse`? The reason is that for all generic class-based views the urls are not loaded when the file is imported, so we have to use the lazy form of reverse to load them later when they’re available.
 
+----------
+
+The UserCreationForm does not provide an email field. But we can extend it.
+Create a file named forms.py inside the accounts folder:
+
+```py
+# accounts/forms.py
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+class SignUpForm(UserCreationForm):
+    email = forms.CharField(max_length=254, required=True, widget=forms.EmailInput())
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')
+```
+
+```py
+# accounts/view.py
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+from .forms import SignUpForm
+
+class SignUp(CreateView):
+    form_class = SignUpForm
+    success_url = reverse_lazy('login')
+    template_name='accounts/signup.html'
+```
+
+
 # Tools
 ```
 mkdir myproject

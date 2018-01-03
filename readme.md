@@ -2,10 +2,10 @@
 `{{ value|truncatechars:9 }}`
 * [truncator in templates](https://stackoverflow.com/questions/5235994/django-template-tag-to-truncate-text)
 
-```
-sol@46.101.221.94
-pass1234
-```
+
+# Quick tips
+
+Why use `reverse_lazy` instead of `reverse`? The reason is that for all generic class-based views the urls are not loaded when the file is imported, so we have to use the lazy form of reverse to load them later when they’re available.
 
 # Tools
 ```

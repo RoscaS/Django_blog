@@ -1,12 +1,13 @@
 {% extends "accounts/accounts_base.html" %}
 
+
 {% block title %}
-Sign Up
+Log in
 {% endblock %}
 
 
 {% block card_title %}
-Sign up
+Log in
 {% endblock %}
 
 
@@ -16,10 +17,16 @@ btn btn-primary btn-block
 
 
 {% block button_label %}
-Sign up
+Log in
 {% endblock %}
 
 
 {% block card_footer %}
-Already have an account? <a href="{% url 'login' %}">Log in</a>
+New to this blog? <a href="{% url 'signup' %}">Sign up</a>
+{% endblock %}
+
+{% block extra %}
+<small>
+  <a class="text-muted" href="{% url 'password_reset' %}">Forgot your password</a>
+</small>
 {% endblock %}

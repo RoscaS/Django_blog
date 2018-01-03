@@ -1,5 +1,4 @@
 {% load static %}
-{% load bootstrap4 %}
 
 <!DOCTYPE html>
 
@@ -29,7 +28,7 @@
             
             <div class="content">
 
-              {% bootstrap_messages %}
+              {% include "includes/_messages.html" %}
 
               {% block content %}
 

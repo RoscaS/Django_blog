@@ -21,16 +21,18 @@
       <p class="card-text">{{ post.body | truncatewords_html:50 | safe}}</p>
       <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">
         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-        <strong style="margin-left: 5px">Read More</strong>
+        <span style="margin-left: 0.5rem">Read More</span>
       </a>
     </div>
-    <div class="card-footer text-muted">
-      {{ post.date }} by
+
+    <div class="d-inline p-2 card-footer text-muted">
+      {{ post.date }} <strong>by</strong>
       <a href="#">
-        <img style="margin-left: 5px" src="{{ post.author|gravatar }}" class="w-18 rounded">
+        <img style="margin-left: 0.5rem" src="{{ post.author|gravatar }}" class="w-18 rounded">
         {{ post.author }}
       </a>
     </div>
+
   </div>
   {% endfor %}
 

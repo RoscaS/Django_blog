@@ -7,44 +7,41 @@
 {% block content %}
 <div class="container">
   <div class="title">
-    <h1>
-      {{ post.title }}
-    </h1>
-    <hr>
+    <h1>{{ post.title }}</h1>
   </div>
+  <hr>
   <img class="img-fluid" src="https://picsum.photos/750/300/?image={% random_int 1 1000 %}" alt="Responsive image">
-  <h3 class="text-muted" style="margin-top: 20px">
+  <h3 class="text-muted" style="margin-top: 2rem">
     <i>{{ post.headline }}</i>
   </h3>
-  <p>{{ post.body | safe }}</p>
-  {{ post.date }} by
-  <a href="#">
-    <img style="margin-left: 5px" src="{{ post.author|gravatar }}" class="w-18 rounded">
-    {{ post.author }}
-  </a>
+  <p>{{ post.body|safe }}</p>
+  <hr style="margin-top: -1rem">
+  <div>
+    {{ post.date }} by
+    <a href="#">
+      <img style="margin-left: 0.5rem" src="{{ post.author|gravatar }}" class="w-18 rounded">
+      {{ post.author }}
+    </a>
+  </div>
   <br>
-  <div class="row" style="margin-top: 10px">
-    <div class="col-md-auto" style="margin-top: 15px">
-      <a href="{% url 'home' %}" class="btn btn-primary">
+  <div class="d-inline p-2 row" style="margin-top: 1rem">
+      <a href="{% url 'home' %}" class="btn btn-primary" style="margin: 0.2rem">
         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-        <strong style="margin-left: 5px">Home</strong>
+        <strong>Home</strong>
       </a>
-    </div>
     {% if post.author == user %}
-    <div class="col-md-auto" style="margin-top: 15px">
       <a href="{% url 'edit_post' post.pk %}"
         class="btn btn-danger"
-        role="button">
+        role="button"
+        style="margin: 0.2rem">
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
       </a>
-    </div>
-    <div class="col-md-auto" style="margin-top: 15px">
       <a href="{% url 'delete_post' post.pk %}"
         class="btn btn-danger"
-        role="button">
+        role="button"
+        style="margin: 0.2rem">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
       </a>
-    </div>
     {% endif %}
   </div>  
 

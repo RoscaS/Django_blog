@@ -9,11 +9,11 @@
   <div class="title">
     <h1>{{ post.title }}</h1>
   </div>
-  <hr>
   <img class="img-fluid" src="https://picsum.photos/750/300/?image={% random_int 1 1000 %}" alt="Responsive image">
   <h3 class="text-muted" style="margin-top: 2rem">
     <i>{{ post.headline }}</i>
   </h3>
+  <hr>  
   <p>{{ post.body|safe }}</p>
   <hr style="margin-top: -1rem">
   <div>
@@ -25,19 +25,19 @@
   </div>
   <br>
   <div class="d-inline p-2 row" style="margin-top: 1rem">
-      <a href="{% url 'home' %}" class="btn btn-primary" style="margin: 0.2rem">
+      <a href="{% url 'home' %}" class="btn btn-outline-primary" style="margin: 0.2rem">
         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-        <strong>Home</strong>
+        Home
       </a>
     {% if post.author == user %}
       <a href="{% url 'edit_post' post.pk %}"
-        class="btn btn-danger"
+        class="btn btn-outline-danger"
         role="button"
         style="margin: 0.2rem">
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
       </a>
       <a href="{% url 'delete_post' post.pk %}"
-        class="btn btn-danger"
+        class="btn btn-outline-danger"
         role="button"
         style="margin: 0.2rem">
         <i class="fa fa-trash-o" aria-hidden="true"></i>

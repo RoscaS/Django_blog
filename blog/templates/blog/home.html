@@ -17,9 +17,9 @@
     <img class="card-img-top" src="https://picsum.photos/750/300/?image={% random_int 1 1000 %}" alt="Card image cap">
     <div class="card-body">
       <h2 class="card-title">{{ post.title }}</h2>
-      <h5 class="text-muted"><i>{{ post.headline }}</i></h5>
+      <h5 class="text-muted headline"><i>{{ post.headline }}</i></h5>
       <p class="card-text">{{ post.body | truncatewords_html:50 | safe}}</p>
-      <a href="{% url 'post_detail' post.id %}" class="btn btn-primary">
+      <a href="{% url 'post_detail' post.id %}" class="btn btn-outline-primary">
         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
         <span style="margin-left: 0.5rem">Read More</span>
       </a>

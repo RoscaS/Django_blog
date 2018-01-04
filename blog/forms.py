@@ -1,4 +1,5 @@
 from django import forms
+from .models import Post
 
 class ContactForm(forms.Form):
     subject = forms.CharField(max_length=100)
@@ -12,3 +13,12 @@ class ContactForm(forms.Form):
 
     def send_email(self):
         print('\n\nSENDING EMAIL\n\n')
+
+
+class PostForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.TextInput(), max_length=255)
+
+    class Meta:
+        model = Post
+        fields = ['title', 'headline', 'body']
+

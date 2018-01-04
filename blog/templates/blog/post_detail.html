@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load custom_tags %}
+{% load custom_tags %} {% load gravatar %}
 
 {% block title %}{{ post.title }}{% endblock title %}
 
@@ -18,8 +18,35 @@
   </h3>
   <p>{{ post.body | safe }}</p>
   {{ post.date }} by
-  <a href="#">{{ post.author }}</a>
+  <a href="#">
+    <img style="margin-left: 5px" src="{{ post.author|gravatar }}" class="w-18 rounded">
+    {{ post.author }}
+  </a>
   <br>
-  <a href="{% url 'home' %}" class="btn btn-primary" style="margin-top: 20px"><strong>Home</strong></a>
+  <div class="row" style="margin-top: 10px">
+    <div class="col-md-auto" style="margin-top: 15px">
+      <a href="{% url 'home' %}" class="btn btn-primary">
+        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+        <strong style="margin-left: 5px">Home</strong>
+      </a>
+    </div>
+    {% if post.author == user %}
+    <div class="col-md-auto" style="margin-top: 15px">
+      <a href="{% url 'edit_post' post.pk %}"
+        class="btn btn-danger"
+        role="button">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="col-md-auto" style="margin-top: 15px">
+      <a href="{% url 'delete_post' post.pk %}"
+        class="btn btn-danger"
+        role="button">
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+      </a>
+    </div>
+    {% endif %}
+  </div>  
+
 </div>
 {% endblock content %}

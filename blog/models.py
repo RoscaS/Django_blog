@@ -11,11 +11,15 @@ def _paragraph():
 
 class Post(models.Model): 
     title = models.CharField(max_length=255)
-    headline = models.CharField(max_length=400)
-    body  = models.TextField(max_length=4000, null=True, blank=True)
+    headline = models.CharField(max_length=400, blank=True)
+    body  = models.TextField(max_length=None, null=True, blank=True)
     date  = models.DateTimeField(auto_now_add=True)
     views = models.PositiveIntegerField(default=0)
     author  = models.ForeignKey(User, related_name='posts', on_delete=None)
+    
+    updated_at = models.DateTimeField(null=True)
+    updated_by = models.ForeignKey(User, null=True, related_name='+', on_delete=None)
+
 
     def __str__(self):
         return self.title

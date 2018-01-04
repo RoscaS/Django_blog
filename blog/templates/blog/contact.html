@@ -9,7 +9,10 @@
   <form method="post" class="form">
     {% csrf_token %}
     {% include 'includes/_form.html' %}
-      <button type="submit" class="btn btn-success">Submit</button>
+      <button type="submit" class="btn btn-success">
+        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        <strong>Submit</strong>
+      </button>
   </form>
 </div>
 {% endblock content %}

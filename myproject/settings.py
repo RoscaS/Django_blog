@@ -158,3 +158,14 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 SITE_ID = 1
+
+
+
+SOCIALACCOUNT_PROVIDERS =  { 'facebook':
+                               {'METHOD': 'oauth2',
+                                'SCOPE': ['email'],
+                                'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+                                'LOCALE_FUNC': lambda request: 'en_US',
+                                'VERSION': 'v2.4'
+                               }
+                           }

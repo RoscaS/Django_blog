@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Post{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8 col-md-10 col-sm-12">
+    <div class="card">
+
+      <div class="card-body">
+        <h3 class="card-title text-center">
+          <strong>Delete post?</strong>
+        </h3>
+        <br>
+        <div class="row justify-content-center">
+          <form method="post" novalidate>
+            {% csrf_token %} {% include 'includes/_form.html' %}
+            <a href="{% url 'post_detail' post.pk %}" class="btn btn-outline-success" role="button" style="margin: 0.2rem">
+              <i class="fa fa-angle-double-left" aria-hidden="true"></i> Cancel
+            </a>
+            <button type="submit" class="btn btn-outline-danger" style="margin: 0.2rem">
+              <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

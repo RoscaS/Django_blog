@@ -6,9 +6,7 @@
 
 {% block content %}
 <div class="container">
-  <div class="title">
-    <h1>{{ post.title }}</h1>
-  </div>
+  <h1 class="title">{{ post.title }}</h1>
   <img class="img-fluid" src="https://picsum.photos/750/300/?image={% random_int 1 1000 %}" alt="Responsive image">
   <h3 class="text-muted" style="margin-top: 2rem">
     <i>{{ post.headline }}</i>

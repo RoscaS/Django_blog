@@ -2,8 +2,11 @@ from django.utils import timezone
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.urls import reverse_lazy
 
+from rolepermissions.mixins import HasPermissionsMixin
+
+
+from django.urls import reverse_lazy
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, DetailView, FormView, \
@@ -35,8 +38,8 @@ class ContactView(SuccessMessageMixin, FormView):
         return super().form_valid(form)
 
 
-@method_decorator(login_required, name='dispatch')
-class NewPostView(CreateView):
+class NewPostView(HasPermissionsMixin, CreateView):
+    required_permission = 'create_post'
     model       = Post
     form_class  = PostForm
 
@@ -47,16 +50,11 @@ class NewPostView(CreateView):
         return redirect('post_detail', pk=post.pk)
 
 
-@method_decorator(login_required, name='dispatch')
 class PostUpdateView(UpdateView):
     model = Post
     fields = ('title', 'headline', 'body',)
     pk_url_kwarg = 'pk'
     context_object_name = 'post'
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(author=self.request.user)
 
     def form_valid(self, form):
         post = form.save(commit=False)
@@ -66,12 +64,8 @@ class PostUpdateView(UpdateView):
         return redirect('post_detail', pk=post.pk)
 
 
-@method_decorator(login_required, name='dispatch')
-class PostDeleteView(UpdateView):
+class PostDeleteView(DeleteView):
     model = Post
     pk_url_kwarg = 'pk'
-    success_url = reverse_lazy('/')
+    success_url = reverse_lazy('home')
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(author=self.request.user)

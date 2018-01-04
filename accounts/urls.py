@@ -1,12 +1,13 @@
 from django.urls import path, re_path
 from django.contrib.auth import views as auth_views
 
-from . import views
+from accounts.views import SignUpView
+from accounts.forms import SignUpForm
 
 urlpatterns = [
     path(
         'signup/',
-         views.SignUp.as_view(
+         SignUpView.as_view(
              template_name='accounts/signup.html'
          ), 
          name='signup'
@@ -67,7 +68,7 @@ urlpatterns = [
     path(
         'settings/password/',
         auth_views.PasswordChangeView.as_view(
-            template_name='accounts/password_change.html'
+            template_name='accounts/password_change.html',
         ),
         name='password_change',
     ),

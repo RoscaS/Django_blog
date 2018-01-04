@@ -12,6 +12,14 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
+
+
+
+
+
+
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -48,6 +56,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
 
     # Divers
+    'rolepermissions',
     'django_extensions',
     'widget_tweaks',
     'bootstrap4',
@@ -55,6 +64,7 @@ INSTALLED_APPS = [
     # Internal
     'blog',
     'accounts',
+    'private',
 ]
 
 MIDDLEWARE = [
@@ -169,3 +179,9 @@ SOCIALACCOUNT_PROVIDERS =  { 'facebook':
                                 'VERSION': 'v2.4'
                                }
                            }
+
+
+
+# Permissions
+ROLEPERMISSIONS_MODULE = 'myproject.roles'
+ROLEPERMISSIONS_REGISTER_ADMIN = True

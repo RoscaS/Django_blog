@@ -1,4 +1,5 @@
 {% load gravatar %}
+{% load permission_tags %}
 
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
   <div class="container">
@@ -40,6 +41,11 @@
             {{ user.username }}
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% if user|can:'create_post' or user|has_role:'moderator' %}
+              <a class="dropdown-item" href="{% url 'new_post' %}">New post</a>
+            {% else %}
+              <a class="dropdown-item disabled" data-toggle="tooltip" data-placement="top" title="Please use the contact form to ask for permission" href="#">New post</a>
+            {% endif %}
             <a class="dropdown-item" href="#">My account</a>
             <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
             <div class="dropdown-divider"></div>

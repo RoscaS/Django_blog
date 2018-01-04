@@ -1,20 +1,35 @@
 {% extends "base.html" %}
 
-{% load gravatar %}{% load static %}{% load custom_tags %}
+{% load gravatar %}{% load static %}{% load custom_tags %}{% load permission_tags %}
 
 {% block title %}Home{% endblock title %}
 
 {% block intro %} {% include 'includes/_type.html' %} {% endblock %}
 
 {% block content %}
-  <h1 class="my-4">Articles:
-    <!-- <small>Secondary Text</small> -->
-  </h1>
+  <h1 class="title">Articles</h1>
 
-  <!-- Blog Post -->
+  {% if user|can:'create_post' %}
+  
+  <button class="btn btn-outline-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="margin-top: -3rem">
+    New post
+  </button>
+  <div class="collapse" id="collapseExample" style="margin-bottom: 0.2rem">
+    <div class="card card-body">
+      {% include "blog/includes/_new_post.html" %}
+    </div>
+  </div>
+
+  
+  
+  {% endif %}
+
+
+
   {% for post in posts %}
   <div class="card mb-4">
-    <img class="card-img-top" src="https://picsum.photos/750/300/?image={% random_int 1 1000 %}">
+
+    <img class="card-img-top" src="https://picsum.photos/750/300/?image={% random_int 1 1000 %}" alt="Card image cap">
     <div class="card-body">
       <h2 class="card-title">{{ post.title }}</h2>
       <h5 class="text-muted headline"><i>{{ post.headline }}</i></h5>
@@ -35,6 +50,9 @@
 
   </div>
   {% endfor %}
+
+
+
 
   {% include "includes/_pagination.html" %}
 

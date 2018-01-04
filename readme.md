@@ -37,6 +37,31 @@ class SignUp(CreateView):
     template_name='accounts/signup.html'
 ```
 
+# Mixins through Detail and ListView
+
+* [django official](https://docs.djangoproject.com/en/2.0/topics/class-based-views/mixins/)
+
+## `DetailView`: working with a single Django obj
+
+To show the detail of an object we need to do 2 things:
+
+1. Lookup the object
+2. Make a `TemplateResponse` with a suitable template and that the looked up object as **context**
+
+`DetailView` relies on `SingleObjectMixin` which provides a `get_object()` method that figures out the object based on the URL of the request looking for **pk** or **slug** keyword arguments as declared in the URLConf (settings.py: `ROOT_URLCONF = 'myproject.urls'`) of the request and looks the object up either from `model` attribute on the **view** or the `queryset` attribute if that's provided.
+
+`SingleObjectMixin` alors overrides `get_context_data()`, which is used across all Django's built in CBVs to supply **context data** for templates renders.
+
+/...
+
+
+
+
+
+
+
+
+
 
 # Tools
 ```
@@ -185,3 +210,63 @@ accounts/reset/done/ [name='password_reset_complete']
 
 * Client ID: `bb619d2e9e29bc30cf18`
 * Client Secret: `97679f4c72b1ce43442f700e2a9b4ea19a24cda1`
+
+
+# Role-permissions
+
+* [django-role-permissions](http://django-role-permissions.readthedocs.io/en/stable/quickstart.html)
+
+
+* Create a roles.py file in the same folder as your settings.py and two roles:
+```py
+from rolepermissions.roles import AbstractUserRole
+
+class Doctor(AbstractUserRole):
+    available_permissions = {
+        'create_medical_record': True,
+    }
+
+class Nurse(AbstractUserRole):
+    available_permissions = {
+        'edit_patient_file': True,
+    }
+```
+
+Add a reference to your roles module to your settings:
+
+```py
+ROLEPERMISSIONS_MODULE = 'myapplication.roles'
+```
+
+When you create a new user, set its role using:
+
+```py
+>>> from rolepermissions.roles import assign_role
+>>> user = User.objects.get(id=1)
+>>> assign_role(user, 'doctor')
+```
+
+and check its permissions using:
+
+```py
+>>> from rolepermissions.checkers import has_permission
+>>>
+>>> has_permission(user, 'create_medical_record')
+True
+>>> has_permission(user, 'edit_patient_file')
+False
+```
+
+You can also change users permissions:
+
+```py
+>>> from rolepermissions.permissions import grant_permission, revoke_permission
+>>>
+>>> revoke_permission(user, 'create_medical_record')
+>>> grant_permission(user, 'edit_patient_file')
+>>>
+>>> has_permission(user, 'create_medical_record')
+False
+>>> has_permission(user, 'edit_patient_file')
+True
+```

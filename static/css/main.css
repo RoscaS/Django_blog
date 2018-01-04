@@ -1,12 +1,10 @@
 .h1,
 .h2,
-.h3,
 .h4,
 .h5,
 .h6,
 h1,
 h2,
-h3,
 h4,
 h5,
 h6 {
@@ -24,8 +22,8 @@ body {
 }
 
 .title {
-    margin-top: 50px;
-    margin-bottom: 30px;
+    margin-top: 2rem;
+    margin-bottom: 3.5rem;
     font-size: 35px;
     line-height: 1;
 }

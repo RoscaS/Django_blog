@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load permission_tags %}
+
+{% block content %}
+
+{% if user|can:'create_post' %}
+  <h1>{{ user.username }} can <i>create_post</i></h1>
+{% else %}
+  <h1>{{ user.username }} can't <i>create_post</i></h1>
+  {% endif %}
+  
+
+{% endblock %}

@@ -2,9 +2,7 @@ from django.utils import timezone
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
 from rolepermissions.mixins import HasPermissionsMixin
-
 
 from django.urls import reverse_lazy
 from django.shortcuts import render, get_object_or_404, redirect
@@ -16,15 +14,40 @@ from blog.models import Post
 from blog.forms import ContactForm, PostForm
 
 
+# class HomeListView(ListView):
+#     form_class = PostForm
+#     model = Post
+#     paginate_by = 5
+#     context_object_name = 'posts'
+#     queryset = Post.objects.order_by('-date')
+
+#     def post(self, request, *args, **kwargs):
+#         self.object_list = self.get_queryset()
+#         return super().post(self, request, *args, **kwargs)
+    
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['form'] = PostForm()
+#         return context
+
+    # def form_valid(self, form):
+    #     post = form.save(commit=False)
+    #     post.updated_by = self.request.user
+    #     post.updated_at = timezone.now()
+    #     post.save()
+    #     return redirect('post_detail', pk=post.pk)
+
 class HomeListView(ListView):
+    model = Post
     context_object_name = 'posts'
-    paginate_by         = 5
-    queryset            = Post.objects.order_by('-date')
+    paginate_by = 5
+    queryset = Post.objects.order_by('-date')
+
 
 
 class PostDetailView(DetailView):
-    model               = Post
     context_object_name = 'post'
+    model = Post
 
 
 @method_decorator(login_required, name='dispatch')

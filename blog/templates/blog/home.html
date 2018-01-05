@@ -6,22 +6,24 @@
 
 {% block intro %} {% include 'includes/_type.html' %} {% endblock %}
 
+
+
 {% block content %}
+
+
+
   <h1 class="title">Articles</h1>
 
-  {% if user|can:'create_post' %}
-  
-  <button class="btn btn-outline-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="margin-top: -3rem">
-    New post
-  </button>
-  <div class="collapse" id="collapseExample" style="margin-bottom: 0.2rem">
-    <div class="card card-body">
-      {% include "blog/includes/_new_post.html" %}
-    </div>
-  </div>
 
-  
-  
+  {% if user|can:'create_post' %}
+    <button class="btn btn-outline-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="margin-top: -3rem">
+      New post
+    </button>
+    <div class="collapse" id="collapseExample" style="margin-bottom: 1rem">
+      <div class="card card-body">
+        {% include "blog/includes/_new_post.html" %}
+      </div>
+    </div>
   {% endif %}
 
 
@@ -52,11 +54,13 @@
   {% endfor %}
 
 
-
-
   {% include "includes/_pagination.html" %}
 
+
 {% endblock content %}
+
+
+
 
 {% block javascript %}
   <script src="{% static 'js/type.js' %}"></script>

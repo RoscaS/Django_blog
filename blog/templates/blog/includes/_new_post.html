@@ -1,17 +1,14 @@
 <div class="container">
-  <h1 class="title">New post</h1>
+  <!-- <h1 class="title">New post</h1> -->
 
   <form method="post" novalidate>
     {% csrf_token %} 
     {% include 'includes/_form.html' %}
-    <div class="d-inline p-2 row" style="margin-top: 1rem">
-      <a href="{% url 'home' %}" class="btn btn-outline-primary" style="margin: 0.2rem">
-        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-        Home
-      </a>
+    <!-- <div class="d-inline p-2 row" style="margin-top: 1rem"> -->
       <button type="submit" class="btn btn-outline-success">
-        <strong>Post</strong>
+        <i class="fa fa-paper-plane" aria-hidden="true" style="margin-right: 0.5rem"></i>
+        Post
       </button>
-    </div>
+    <!-- </div> -->
   </form>
 </div>

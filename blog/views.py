@@ -30,12 +30,12 @@ from blog.forms import ContactForm, PostForm
 #         context['form'] = PostForm()
 #         return context
 
-    # def form_valid(self, form):
-    #     post = form.save(commit=False)
-    #     post.updated_by = self.request.user
-    #     post.updated_at = timezone.now()
-    #     post.save()
-    #     return redirect('post_detail', pk=post.pk)
+#     def form_valid(self, form):
+#         post = form.save(commit=False)
+#         post.updated_by = self.request.user
+#         post.updated_at = timezone.now()
+#         post.save()
+#         return redirect('post_detail', pk=post.pk)
 
 class HomeListView(ListView):
     model = Post

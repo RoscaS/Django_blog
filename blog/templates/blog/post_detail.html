@@ -12,7 +12,7 @@
     <i>{{ post.headline }}</i>
   </h3>
   <hr>  
-  <p>{{ post.body|safe }}</p>
+  {{ post.get_message_as_markdown }}
   <hr style="margin-top: -1rem">
   <div>
     {{ post.date }} by
@@ -28,18 +28,7 @@
         Home
       </a>
     {% if post.author == user %}
-      <a href="{% url 'edit_post' post.pk %}"
-        class="btn btn-outline-danger"
-        role="button"
-        style="margin: 0.2rem">
-        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-      </a>
-      <a href="{% url 'delete_post' post.pk %}"
-        class="btn btn-outline-danger"
-        role="button"
-        style="margin: 0.2rem">
-        <i class="fa fa-trash-o" aria-hidden="true"></i>
-      </a>
+      {% include "blog/includes/_edit_delete.html" %}
     {% endif %}
   </div>  
 

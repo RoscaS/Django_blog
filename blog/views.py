@@ -1,4 +1,5 @@
 from django.utils import timezone
+from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -13,29 +14,6 @@ from django.views.generic import ListView, DetailView, FormView, \
 from blog.models import Post
 from blog.forms import ContactForm, PostForm
 
-
-# class HomeListView(ListView):
-#     form_class = PostForm
-#     model = Post
-#     paginate_by = 5
-#     context_object_name = 'posts'
-#     queryset = Post.objects.order_by('-date')
-
-#     def post(self, request, *args, **kwargs):
-#         self.object_list = self.get_queryset()
-#         return super().post(self, request, *args, **kwargs)
-    
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['form'] = PostForm()
-#         return context
-
-#     def form_valid(self, form):
-#         post = form.save(commit=False)
-#         post.updated_by = self.request.user
-#         post.updated_at = timezone.now()
-#         post.save()
-#         return redirect('post_detail', pk=post.pk)
 
 class HomeListView(ListView):
     model = Post
@@ -53,7 +31,7 @@ class PostDetailView(DetailView):
 @method_decorator(login_required, name='dispatch')
 class ContactView(SuccessMessageMixin, FormView):
     form_class      = ContactForm
-    success_url     = '/'
+    success_url     = reverse_lazy('home')
     success_message = 'Thank you for your feedback!'
 
     def form_valid(self, form):
@@ -61,34 +39,47 @@ class ContactView(SuccessMessageMixin, FormView):
         return super().form_valid(form)
 
 
-class NewPostView(HasPermissionsMixin, CreateView):
+class NewPostView(SuccessMessageMixin, HasPermissionsMixin, CreateView):
     required_permission = 'create_post'
     model       = Post
     form_class  = PostForm
-
+    success_message = 'Post successfully created'
+    
     def form_valid(self, form):
         post = form.save(commit=False)
         form.instance.author = self.request.user
         post.save()
-        return redirect('post_detail', pk=post.pk)
+        self.success_url = f'/blog/post/{post.pk}'
+        return super().form_valid(form)
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(SuccessMessageMixin, UpdateView):
+    # TODO Row based permission !
+
     model = Post
     fields = ('title', 'headline', 'body',)
     pk_url_kwarg = 'pk'
     context_object_name = 'post'
+    success_message = 'Post successfully edited'
 
     def form_valid(self, form):
         post = form.save(commit=False)
         post.updated_by = self.request.user
         post.updated_at = timezone.now()
         post.save()
-        return redirect('post_detail', pk=post.pk)
+        
+        self.success_url = f'/blog/post/{post.pk}'
+        return super().form_valid(form)
 
 
 class PostDeleteView(DeleteView):
+    # TODO Row based permission !
+
     model = Post
     pk_url_kwarg = 'pk'
     success_url = reverse_lazy('home')
+    success_message = 'Post successfully deleted'
 
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super().delete(request, *args, **kwargs)

@@ -15,33 +15,22 @@
   <h1 class="title">Articles</h1>
 
 
-  {% if user|can:'create_post' %}
-    <button class="btn btn-outline-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="margin-top: -3rem">
-      New post
-    </button>
-    <div class="collapse" id="collapseExample" style="margin-bottom: 1rem">
-      <div class="card card-body">
-        {% include "blog/includes/_new_post.html" %}
-      </div>
-    </div>
-  {% endif %}
-
-
-
   {% for post in posts %}
   <div class="card mb-4">
-
     <img class="card-img-top" src="https://picsum.photos/750/300/?image={% random_int 1 1000 %}" alt="Card image cap">
     <div class="card-body">
       <h2 class="card-title">{{ post.title }}</h2>
       <h5 class="text-muted headline"><i>{{ post.headline }}</i></h5>
-      <p class="card-text">{{ post.body | truncatewords_html:50 | safe}}</p>
-      <a href="{% url 'post_detail' post.id %}" class="btn btn-outline-primary">
-        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-        <span style="margin-left: 0.5rem">Read More</span>
-      </a>
+      <hr>
+      <p class="card-text">{{ post.get_message_as_markdown | truncatewords_html:50}}</p>
+      <div class="d-inline p-2 row" style="margin-top: 1rem">
+        <a href="{% url 'post_detail' post.id %}" class="btn btn-outline-primary" style="margin: 0.2rem">
+          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+          Read More
+        </a>
+        {% if post.author == user %} {% include "blog/includes/_edit_delete.html" %} {% endif %}
+      </div>
     </div>
-
     <div class="d-inline p-2 card-footer text-muted">
       {{ post.date }} <strong>by</strong>
       <a href="#">
@@ -49,7 +38,6 @@
         {{ post.author }}
       </a>
     </div>
-
   </div>
   {% endfor %}
 

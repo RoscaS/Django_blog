@@ -1,6 +1,6 @@
 # TODO
 
-
+* Fix full screen md-editor
 
 # Quick tips
 

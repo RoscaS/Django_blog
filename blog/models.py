@@ -1,6 +1,9 @@
 import forgery_py
 from random import seed, randint
 
+from django.utils.html import mark_safe
+from markdown import markdown
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import Truncator
@@ -19,6 +22,9 @@ class Post(models.Model):
     
     updated_at = models.DateTimeField(null=True)
     updated_by = models.ForeignKey(User, null=True, related_name='+', on_delete=None)
+
+    def get_message_as_markdown(self):
+        return mark_safe(markdown(self.body, safe_mode='escape'))
 
 
     def __str__(self):

@@ -1,22 +1,21 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}Edit Post{% endblock %}
 
-{% block content %}
-<div class="row justify-content-center">
-  <div class="col-lg-10">
-    <div class="card">
-      <div class="card-body">
-        <h3 class="card-title"> <strong>Edit post</strong> </h3>
-        <br>
-        <form method="post" class="mb-4" novalidate>
-            {% csrf_token %}
-            {% include 'includes/_form.html' %}
-            <button type="submit" class="btn btn-success">Save changes</button>
-            <a href="{% url 'post_detail' post.pk %}" class="btn btn-outline-secondary" role="button">Cancel</a>
-          </form>
-      </div>
-    </div>
-  </div>
-</div>
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/simplemde.min.css' %}">
 {% endblock %}
+
+{% block content %}
+  {% include "blog/includes/_new_post.html" %}
+{% endblock content %}
+
+
+{% block javascript %}
+  <script src="{% static 'js/simplemde.min.js' %}"></script>
+  <script>
+    var simplemde = new SimpleMDE();
+  </script>
+{% endblock javascript %}

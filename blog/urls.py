@@ -46,7 +46,9 @@ urlpatterns = [
 
     path(
         'post/delete/<int:pk>/',
-        views.PostDeleteView.as_view(),
+        views.PostDeleteView.as_view(
+            template_name = 'blog/post_confirm_delete.html'
+        ),
         name='delete_post'
     )
 

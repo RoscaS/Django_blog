@@ -1,4 +1,6 @@
 import forgery_py
+import requests
+
 from random import seed, randint
 
 from django.utils.html import mark_safe
@@ -11,6 +13,10 @@ from django.utils.text import Truncator
 def _paragraph():
     p = forgery_py.lorem_ipsum.sentences(randint(4, 18))
     return f'<p>{p}</p><br>'
+
+def _paragraph_md():
+    response = requests.get('https://jaspervdj.be/lorem-markdownum/markdown.txt')
+    return response.text
 
 class Post(models.Model): 
     title = models.CharField(max_length=255)
@@ -30,14 +36,18 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    def generate_fake(count=50):   
+    def generate_fake(count=50, md=False):   
         seed()
+        users = [i.username for i in User.objects.all()]
         for i in range(count):
+            content = requests.get('https://jaspervdj.be/lorem-markdownum/markdown.txt').text
+            article = content.splitlines()
+
             Post.objects.create(
-                title    = forgery_py.lorem_ipsum.words(randint(2,5)).capitalize(),
-                headline = forgery_py.lorem_ipsum.sentence(),
-                body     = ''.join([_paragraph() for i in range(randint(1, 4))]),
-                author   = User.objects.get(username='RoscaS')
+                title    = article[0].lstrip('# '),
+                headline = article[2].lstrip('## '),
+                body     = '\n'.join(article[5:]).capitalize(),
+                author   = User.objects.get(username=users[randint(0, len(users)-1)])
             )
 
 

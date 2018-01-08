@@ -1,8 +1,11 @@
 # TODO
 
 * Fix full screen md-editor
+* [Cache user image](https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html)
 
 # Quick tips
+
+# Fix last seen (user profile)
 
 Why use `reverse_lazy` instead of `reverse`? The reason is that for all generic class-based views the urls are not loaded when the file is imported, so we have to use the lazy form of reverse to load them later when they’re available.
 

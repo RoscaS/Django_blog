@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from rolepermissions.mixins import HasPermissionsMixin
 
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, DetailView, FormView, \
@@ -56,7 +56,6 @@ class NewPostView(SuccessMessageMixin, HasPermissionsMixin, CreateView):
 
 class PostUpdateView(SuccessMessageMixin, UpdateView):
     # TODO Row based permission !
-
     model = Post
     fields = ('title', 'headline', 'body',)
     pk_url_kwarg = 'pk'
@@ -67,15 +66,13 @@ class PostUpdateView(SuccessMessageMixin, UpdateView):
         post = form.save(commit=False)
         post.updated_by = self.request.user
         post.updated_at = timezone.now()
-        post.save()
-        
+        post.save()        
         self.success_url = f'/blog/post/{post.pk}'
         return super().form_valid(form)
 
 
 class PostDeleteView(DeleteView):
     # TODO Row based permission !
-
     model = Post
     pk_url_kwarg = 'pk'
     success_url = reverse_lazy('home')
@@ -88,7 +85,21 @@ class PostDeleteView(DeleteView):
 
 @method_decorator(login_required, name='dispatch')
 class UserProfileDetailView(DetailView):
-    context_object_name = 'user'
+    context_object_name = 'usr'
     paginate_by = 5
     model = User
-    # pk_url_kwarg = 'pk'
+
+
+@method_decorator(login_required, name='dispatch')
+class UserUpdateProfileView(SuccessMessageMixin, UpdateView):
+    success_message = 'Profile successfully edited'  
+    pk_url_kwarg = 'pk'
+    model = User
+    fields = (
+        'first_name', 
+        'last_name', 
+        'username',
+    )
+
+    def get_success_url(self):
+        return reverse('profile_page', kwargs={'pk': self.kwargs['pk']})

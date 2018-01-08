@@ -33,7 +33,7 @@
     <div class="d-inline p-2 card-footer text-muted">
       {{ post.date }} <strong>by</strong>
       <a href="{% url 'profile_page' post.author.id %}">
-        <img style="margin-left: 0.5rem" src="{{ post.author|gravatar }}" class="w-18 rounded">
+        <img style="margin-left: 0.5rem" src="{{ post.author|gravatar }}" class="w-18 rounded" width="24">
         {{ post.author }}
       </a>
     </div>

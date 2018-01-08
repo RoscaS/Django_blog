@@ -1,28 +1,53 @@
 {% extends "base.html" %}
-{% load gravatar %}
+{% load gravatar %}{% load humanize %}
 
-{% block title %}{{ user.username | capfirst }} Profile{% endblock %}
+{% block title %}{{ usr.username | capfirst }} Profile{% endblock %}
 
 {% block content %}
-<div class="d-inline p-2 row">
-  <div class="col-lg-4">
-    <img src="{{ user | gravatar }}">
-  </div>
-  <div class="col-lg-6">
-    <h1 class="title">{{ user.username | capfirst }}'s Profile</h1>
-  </div>
-</div>
-<div class="row justify-content-center">
-  <div class="col-lg-8 col-md-10 col-sm-12">
-    <div class="card">
-      <div class="card-body">
-        <ul>
-          <li>{{ user.first_name }}</li>
-          <li>{{ user.last_name }}</li>
-          <li>{{ user. }}</li>
-        </ul>
-      </div>
+
+<div class="container">
+  <h1 class="title">{{ usr.username | capfirst }}'s Profile</h1>
+  <div class="row">
+    <div class="col-md-3">
+      <img src="{{ usr | gravatar }}" width="140">
     </div>
+    <div class="col-md-9">
+      <ul>
+        {% if usr.first_name %}
+        <li>
+          <strong>Name:</strong> {{ usr.first_name | capfirst }}</li>
+        <li>
+          <strong>Last name:</strong> {{ usr.last_name | capfirst }}</li>
+        {% endif %}
+        <li>
+          <strong>Username:</strong> {{ usr.username | capfirst }}</li>
+        <li>
+          <strong>Joined:</strong> {{ usr.date_joined | naturaltime}}</li>
+        <li>
+          <strong>Last seen:</strong> {{ usr.last_login | naturaltime}}</li>
+        <li>
+          <strong>Status: </strong>
+          {% if usr.is_active %}
+          <span class="badge badge-success">online</span>
+          {% else %}
+          <span class="badge badge-danger">offline</span>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br>
+  <div class="d-inline p-2 row" style="margin-top: 1rem">
+    <a href="{% url 'home' %}" class="btn btn-outline-primary" style="margin: 0.2rem">
+      <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+      Home
+    </a>
+    {% if usr == request.user %}
+    <a href="{% url 'update_profile' user.id  %}" class="btn btn-outline-primary" style="margin: 0.2rem">
+      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+      Edit profile
+    </a>
+    {% endif %}
   </div>
 </div>
 

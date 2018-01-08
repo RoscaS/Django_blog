@@ -16,8 +16,8 @@
   <hr style="margin-top: -1rem">
   <div>
     {{ post.date }} by
-    <a href="#">
-      <img style="margin-left: 0.5rem" src="{{ post.author|gravatar }}" class="w-18 rounded">
+    <a href="{% url 'profile_page' post.author.id %}">
+      <img style="margin-left: 0.5rem" src="{{ post.author|gravatar }}" class="w-18 rounded"  width="24">
       {{ post.author }}
     </a>
   </div>

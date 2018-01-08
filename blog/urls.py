@@ -52,13 +52,20 @@ urlpatterns = [
         name='delete_post'
     ),
 
-
     path(
-        '/profile/<int:pk>/',
+        'profile/<int:pk>/',
         views.UserProfileDetailView.as_view(
             template_name = 'blog/user_profile.html'
         ),
         name='profile_page'
-    )
+    ),
+
+    path(
+        'profile/edit/<int:pk>/',
+        views.UserUpdateProfileView.as_view(
+            template_name = 'blog/update_profile.html'
+        ),
+        name='update_profile'
+    ),
 
 ]

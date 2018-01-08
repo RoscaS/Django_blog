@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+Update profile
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8 col-md-10 col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title text-center">
+          <strong>Update profile</strong>
+        </h3>
+        <form method="post" novalidate>
+          {% csrf_token %} {% include 'includes/_form.html' %}
+          <div class="d-inline p-2 row" style="margin-top: 1rem">
+
+            <button type="submit" class="btn btn-outline-primary">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              <strong>Update</strong>
+            </button>
+            <a href="{% url 'home' %}" class="btn btn-outline-danger" style="margin: 0.2rem">
+              <i class="fa fa-ban" aria-hidden="true"></i>
+              Cancel
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/simplemde.min.css' %}">
+{% endblock %}
+
+
+
+{% block nav %}
+  {% include "includes/_navigation.html" %}
+{% endblock %}
+
+
+
+{% block content %}
+  {% include "blog/includes/_text_editor.html" %}
+{% endblock %}
+
+
+
+{% block javascript %}
+  <script src="{% static 'js/simplemde.min.js' %}"></script>
+  <script>
+    var simplemde = new SimpleMDE();
+  </script>
+{% endblock %}

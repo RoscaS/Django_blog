@@ -1,14 +1,10 @@
 <div class="container">
-  <!-- <h1 class="title">New post</h1> -->
-
   <form method="post" novalidate>
     {% csrf_token %} 
     {% include 'includes/_form.html' %}
-    <!-- <div class="d-inline p-2 row" style="margin-top: 1rem"> -->
       <button type="submit" class="btn btn-outline-success">
         <i class="fa fa-paper-plane" aria-hidden="true" style="margin-right: 0.5rem"></i>
         Post
       </button>
-    <!-- </div> -->
   </form>
 </div>

@@ -32,7 +32,6 @@ class Post(models.Model):
     def get_message_as_markdown(self):
         return mark_safe(markdown(self.body, safe_mode='escape'))
 
-
     def __str__(self):
         return self.title
 
@@ -46,7 +45,7 @@ class Post(models.Model):
             Post.objects.create(
                 title    = article[0].lstrip('# '),
                 headline = article[2].lstrip('## '),
-                body     = '\n'.join(article[5:]).capitalize(),
+                body     = '\n'.join(articleq[5:]).capitalize(),
                 author   = User.objects.get(username=users[randint(0, len(users)-1)])
             )
 

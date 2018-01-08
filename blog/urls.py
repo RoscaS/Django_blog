@@ -50,6 +50,15 @@ urlpatterns = [
             template_name = 'blog/post_confirm_delete.html'
         ),
         name='delete_post'
+    ),
+
+
+    path(
+        '/profile/<int:pk>/',
+        views.UserProfileDetailView.as_view(
+            template_name = 'blog/user_profile.html'
+        ),
+        name='profile_page'
     )
 
 ]

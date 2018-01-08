@@ -46,7 +46,7 @@
             {% else %}
               <a class="dropdown-item disabled" data-toggle="tooltip" data-placement="top" title="Please use the contact form to ask for permission" href="#">New post</a>
             {% endif %}
-            <a class="dropdown-item" href="#">My account</a>
+            <a class="dropdown-item" href="{% url 'profile_page' user.id%}">My account</a>
             <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>

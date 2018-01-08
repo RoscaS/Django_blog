@@ -10,6 +10,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, DetailView, FormView, \
     CreateView, UpdateView, DeleteView
+from django.contrib.auth.models import User
 
 from blog.models import Post
 from blog.forms import ContactForm, PostForm
@@ -83,3 +84,11 @@ class PostDeleteView(DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
         return super().delete(request, *args, **kwargs)
+
+
+@method_decorator(login_required, name='dispatch')
+class UserProfileDetailView(DetailView):
+    context_object_name = 'user'
+    paginate_by = 5
+    model = User
+    # pk_url_kwarg = 'pk'

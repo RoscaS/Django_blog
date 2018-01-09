@@ -1,53 +1,19 @@
 {% extends "base.html" %}
 
-{% load gravatar %}{% load static %}{% load custom_tags %}{% load permission_tags %}
+{% load static %}
+{% load permission_tags %}
 
 {% block title %}Home{% endblock title %}
 
 {% block intro %} {% include 'includes/_type.html' %} {% endblock %}
 
-
-
 {% block content %}
-
-
   <h1 class="title">Articles</h1>
 
-
-  {% for post in posts %}
-  <div class="card mb-4">
-    <img class="card-img-top" src="https://picsum.photos/750/300/?image={% random_int 1 1000 %}" alt="Card image cap">
-    <div class="card-body">
-      <h2 class="card-title">{{ post.title }}</h2>
-      <h5 class="text-muted headline"><i>{{ post.headline }}</i></h5>
-      <hr>
-      <p class="card-text">{{ post.get_message_as_markdown | truncatewords_html:50}}</p>
-      <div class="d-inline p-2 row" style="margin-top: 1rem">
-        <a href="{% url 'post_detail' post.id %}" class="btn btn-outline-primary" style="margin: 0.2rem">
-          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-          Read More
-        </a>
-        {% if post.author == user %} {% include "blog/includes/_edit_delete.html" %} {% endif %}
-      </div>
-    </div>
-    <div class="d-inline p-2 card-footer text-muted">
-      {{ post.date }} <strong>by</strong>
-      <a href="{% url 'profile_page' post.author.id %}">
-        <img style="margin-left: 0.5rem" src="{{ post.author|gravatar }}" class="w-18 rounded" width="24">
-        {{ post.author }}
-      </a>
-    </div>
-  </div>
-  {% endfor %}
-
+  {% include "includes/_posts_display.html" %}
 
   {% include "includes/_pagination.html" %}
-
-
 {% endblock content %}
-
-
-
 
 {% block javascript %}
   <script src="{% static 'js/type.js' %}"></script>

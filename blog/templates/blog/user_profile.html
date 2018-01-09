@@ -1,5 +1,8 @@
 {% extends "base.html" %}
-{% load gravatar %}{% load humanize %}
+{% load custom_tags %}
+{% load gravatar %}
+{% load humanize %}
+{% load permission_tags %}
 
 {% block title %}{{ usr.username | capfirst }} Profile{% endblock %}
 
@@ -8,36 +11,29 @@
 <div class="container">
   <h1 class="title">{{ usr.username | capfirst }}'s Profile</h1>
   <div class="row">
-    <div class="col-md-3">
-      <img src="{{ usr | gravatar }}" width="140">
+    <div class="col-md-2" style="margin-right: 5rem; margin-bottom: 1rem">
+      <img src="{{ usr | gravatar }}" width="140" >
     </div>
-    <div class="col-md-9">
-      <ul>
-        {% if usr.first_name %}
-        <li>
-          <strong>Name:</strong> {{ usr.first_name | capfirst }}</li>
-        <li>
-          <strong>Last name:</strong> {{ usr.last_name | capfirst }}</li>
+    <div class="col-md-6">
+      <p>
+        {% if usr.first_name %}  
+          <strong>Name:</strong> {{ usr.first_name | capfirst }} <br>
+          <strong>Last name:</strong> {{ usr.last_name | capfirst }} <br> 
         {% endif %}
-        <li>
-          <strong>Username:</strong> {{ usr.username | capfirst }}</li>
-        <li>
-          <strong>Joined:</strong> {{ usr.date_joined | naturaltime}}</li>
-        <li>
-          <strong>Last seen:</strong> {{ usr.last_login | naturaltime}}</li>
-        <li>
-          <strong>Status: </strong>
-          {% if usr.is_active %}
+        <strong>Username:</strong> {{ usr.username | capfirst }} <br>
+        <strong>Joined:</strong> {{ usr.date_joined | naturaltime}} <br>
+        <strong>Last seen:</strong> {{ usr.last_login | naturaltime}} <br>
+        <strong>Status: </strong>
+        {% if usr.is_active %}
           <span class="badge badge-success">online</span>
-          {% else %}
+        {% else %}
           <span class="badge badge-danger">offline</span>
-          {% endif %}
-        </li>
-      </ul>
+        {% endif %}
+      </p>
     </div>
   </div>
   <br>
-  <div class="d-inline p-2 row" style="margin-top: 1rem">
+  <div class="row" style="margin-top: -1rem">
     <a href="{% url 'home' %}" class="btn btn-outline-primary" style="margin: 0.2rem">
       <i class="fa fa-angle-double-left" aria-hidden="true"></i>
       Home
@@ -50,5 +46,43 @@
     {% endif %}
   </div>
 </div>
+
+
+{% if usr.posts %}
+  <br> <br>
+  <hr>
+  <div class="container">
+    <h1 class="title">Articles</h1>
+    <div class="row">
+      {% for post in posts %}
+    <div class="col-lg-6 col-md-6 col-sm6">
+
+
+    <div class="card card-profile" style="margin-top: 2rem; border">
+      <img class="card-img-top" src="https://picsum.photos/750/300/?image={% random_int 1 1000 %}" alt="Card image cap">
+      <div class="card-body">
+        <h2 class="card-title">{{ post.title }}</h2>
+        <h5 class="text-muted headline"><i>{{ post.headline }}</i></h5>
+        <div class="row" style="margin-top: 2.5rem; margin-bottom: -1.5rem">
+          <a href="{% url 'post_detail' post.id %}" class="btn btn-outline-primary" style="margin: 0.2rem">
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            Read More
+          </a>
+          {% if usr == request.user %} {% include "blog/includes/_edit_delete.html" %} {% endif %}
+        </div>
+      </div>
+      <hr>
+      <div class="text-muted" style="margin: 0.7rem">
+        {{ post.date | naturaltime}}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+
+    {% include "includes/_pagination.html" %}
+  </div>
+
+{% endif %}
 
 {% endblock content %}

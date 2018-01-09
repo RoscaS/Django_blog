@@ -1,7 +1,10 @@
 # TODO
 
 * Fix full screen md-editor
-* [Cache user image](https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html)
+* set-up clean img management (gravatar + posts) [Cache user image](https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html)
+* online/offline situation
+* time format (Post_Detail)
+
 
 # Quick tips
 

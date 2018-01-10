@@ -17,16 +17,17 @@ from blog.forms import ContactForm, PostForm
 
 
 class HomeListView(ListView):
-    model = Post
     context_object_name = 'posts'
-    paginate_by = 5
-    queryset = Post.objects.order_by('-date')
+    model               = Post
+    paginate_by         = 5
+    queryset            = Post.objects.order_by('-date')
+    
 
 
 
 class PostDetailView(DetailView):
     context_object_name = 'post'
-    model = Post
+    model               = Post
 
 
 @method_decorator(login_required, name='dispatch')
@@ -37,14 +38,16 @@ class ContactView(SuccessMessageMixin, FormView):
 
     def form_valid(self, form):
         form.send_email()
+        
         return super().form_valid(form)
 
 
+
 class NewPostView(SuccessMessageMixin, HasPermissionsMixin, CreateView):
+    success_message     = 'Post successfully created'
     required_permission = 'create_post'
-    model       = Post
-    form_class  = PostForm
-    success_message = 'Post successfully created'
+    model               = Post
+    form_class          = PostForm
     
     def form_valid(self, form):
         post = form.save(commit=False)
@@ -56,11 +59,11 @@ class NewPostView(SuccessMessageMixin, HasPermissionsMixin, CreateView):
 
 class PostUpdateView(SuccessMessageMixin, UpdateView):
     # TODO Row based permission !
-    model = Post
-    fields = ('title', 'headline', 'body',)
-    pk_url_kwarg = 'pk'
+    model               = Post
+    fields              = ('title', 'headline', 'body',)
+    pk_url_kwarg        = 'pk'
     context_object_name = 'post'
-    success_message = 'Post successfully edited'
+    success_message     = 'Post successfully edited'
 
     def form_valid(self, form):
         post = form.save(commit=False)
@@ -73,9 +76,9 @@ class PostUpdateView(SuccessMessageMixin, UpdateView):
 
 class PostDeleteView(DeleteView):
     # TODO Row based permission !
-    model = Post
-    pk_url_kwarg = 'pk'
-    success_url = reverse_lazy('home')
+    model           = Post
+    pk_url_kwarg    = 'pk'
+    success_url     = reverse_lazy('home')
     success_message = 'Post successfully deleted'
 
     def delete(self, request, *args, **kwargs):
@@ -87,7 +90,7 @@ class PostDeleteView(DeleteView):
 class UserProfileDetailView(DetailView):
     # context_object_name = 'usr'
     paginate_by = 5
-    model = User
+    model       = User
 
     def get_context_data(self, **kwargs):
         kwargs['usr'] = User.objects.get(id=self.kwargs['pk'])

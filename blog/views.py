@@ -16,14 +16,14 @@ from blog.models import Post
 from blog.forms import ContactForm, PostForm
 
 
+
+
 class HomeListView(ListView):
     context_object_name = 'posts'
     model               = Post
     paginate_by         = 5
     queryset            = Post.objects.order_by('-date')
     
-
-
 
 class PostDetailView(DetailView):
     context_object_name = 'post'
@@ -41,7 +41,7 @@ class ContactView(SuccessMessageMixin, FormView):
         
         return super().form_valid(form)
 
-
+    
 
 class NewPostView(SuccessMessageMixin, HasPermissionsMixin, CreateView):
     success_message     = 'Post successfully created'

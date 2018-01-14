@@ -17,7 +17,6 @@ from blog.forms import ContactForm, PostForm
 
 
 
-
 class HomeListView(ListView):
     context_object_name = 'posts'
     model               = Post

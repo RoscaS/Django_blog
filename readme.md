@@ -276,3 +276,11 @@ False
 >>> has_permission(user, 'edit_patient_file')
 True
 ```
+
+
+
+
+SOOX
+CodeBing
+
+DuckDuckgosearch

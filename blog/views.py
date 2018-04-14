@@ -90,10 +90,6 @@ class UserProfileDetailView(DetailView):
     paginate_by = 5
     model       = User
 
-    def get_context_data(self, **kwargs):
-        kwargs['usr'] = User.objects.get(id=self.kwargs['pk'])
-        kwargs['posts'] = kwargs['usr'].posts.all()
-        return super().get_context_data(**kwargs)
 
 
 

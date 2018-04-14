@@ -35,7 +35,8 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    def generate_fake(count=50, md=False):   
+    @classmethod
+    def generate_fake(cls, count=50, md=False):   
         seed()
         users = [i.username for i in User.objects.all()]
         for i in range(count):

@@ -14,4 +14,3 @@ def input_class(bound_field):
         elif field_type(bound_field) != 'PasswordInput':
             css_class = 'is_valid'
     return f'form-control {css_class}'
-
